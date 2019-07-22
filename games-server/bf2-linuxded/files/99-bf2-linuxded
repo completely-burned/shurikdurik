@@ -1,0 +1,1 @@
+CONFIG_PROTECT="/opt/bf2-linuxded/mods/bf2/settings/serversettings.con /opt/bf2-linuxded/mods/bf2/settings/maplist.con /opt/bf2-linuxded/mods/xpack/settings/serversettings.con /opt/bf2-linuxded/mods/xpack/settings/maplist.con"

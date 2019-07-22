@@ -1,0 +1,14 @@
+[Unit]
+Description=ArmA 2 OA - server
+After=local-fs.target network.target
+
+[Service]
+LimitCORE=1000000
+EnvironmentFile=/etc/conf.d/a2oa-server
+User=arma2
+WorkingDirectory=/opt/a2oa-server
+Restart=always
+ExecStart=/opt/a2oa-server/arma2oaserver -server ${OTHERPARAMS}
+
+[Install]
+WantedBy=multi-user.target

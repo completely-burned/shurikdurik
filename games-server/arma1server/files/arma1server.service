@@ -1,0 +1,15 @@
+[Unit]
+Description=ArmA: Armed Assault - server
+After=local-fs.target network.target
+
+[Service]
+LimitCORE=1000000
+EnvironmentFile=/etc/conf.d/arma1server
+User=arma
+WorkingDirectory=/opt/arma1server
+Restart=always
+ExecStart=/opt/arma1server/armaserver -server ${OTHERPARAMS}
+
+[Install]
+WantedBy=multi-user.target
+

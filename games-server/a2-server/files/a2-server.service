@@ -1,0 +1,14 @@
+[Unit]
+Description=ArmA 2 server
+After=local-fs.target network.target
+
+[Service]
+LimitCORE=1000000
+EnvironmentFile=/etc/conf.d/a2-server
+User=arma2
+WorkingDirectory=/opt/a2-server
+Restart=always
+ExecStart=/opt/a2-server/arma2server -server ${OTHERPARAMS}
+
+[Install]
+WantedBy=multi-user.target
