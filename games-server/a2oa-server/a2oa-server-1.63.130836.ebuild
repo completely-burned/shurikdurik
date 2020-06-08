@@ -6,7 +6,7 @@ EAPI=5
 inherit games systemd
 
 PATCH_P="${P}.tar.bz2"
-DESCRIPTION="ARMA 2 - Linux Server"
+DESCRIPTION="ARMA 2 OA - Linux Server"
 HOMEPAGE="http://community.bistudio.com/wiki/ArmA:_Dedicated_Server"
 SRC_URI="
 	http://dl.dropbox.com/u/18463425/a2oa/${PATCH_P}
@@ -32,22 +32,22 @@ RDEPEND="
 
 GAMES_USER_DED=arma2
 dir=${GAMES_PREFIX_OPT}/${PN}
-QA_PREBUILT="${dir}"/arma2oaserver
+QA_PREBUILT="${dir}"/server
 
 S=${WORKDIR}
 
 src_prepare() {
-	mv arma2oaserver arma2oaserver-daemon-bad.txt
-	mv server arma2oaserver
 	rm -f tolower.c install
 }
 
 src_install() {
 	insinto "${dir}"
-	doins -r * || die "doins failed"
-	fperms +x "${dir}"/arma2oaserver || die "fperms failed"
+	doins -r *
+	fperms +x "${dir}"/server
 
-	newconfd "${FILESDIR}"/${PN}.confd ${PN}
+	doins -r "${FILESDIR}"/${PN}-tolower.sh
+	fperms +x "${dir}"/${PN}-tolower.sh
+
 	systemd_dounit "${FILESDIR}"/${PN}.service
 
 	prepgamesdirs

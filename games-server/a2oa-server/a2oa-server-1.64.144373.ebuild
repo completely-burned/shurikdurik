@@ -33,25 +33,22 @@ RDEPEND="
 
 GAMES_USER_DED=arma2
 dir=${GAMES_PREFIX_OPT}/${PN}
-QA_PREBUILT="${dir}"/arma2oaserver
+QA_PREBUILT="${dir}"/server
 
 S=${WORKDIR}
 
 src_prepare() {
-	mv arma2oaserver arma2oaserver-daemon-bad.txt
-	mv server arma2oaserver
 	rm -f tolower.c install
 }
 
 src_install() {
 	insinto "${dir}"
 	doins -r *
-	fperms +x "${dir}"/arma2oaserver
+	fperms +x "${dir}"/server
 
-	doins -r "${FILESDIR}"/${PN}_tolower.sh
-	fperms +x "${dir}"/${PN}_tolower.sh
+	doins -r "${FILESDIR}"/${PN}-tolower.sh
+	fperms +x "${dir}"/${PN}-tolower.sh
 
-	newconfd "${FILESDIR}"/${PN}.confd ${PN}
 	systemd_dounit "${FILESDIR}"/${PN}.service
 
 	prepgamesdirs
