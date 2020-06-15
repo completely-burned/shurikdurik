@@ -1,37 +1,39 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit unpacker desktop
+inherit unpacker desktop git-r3
 
 MY_PN="Google-Play-Music-Desktop-Player-UNOFFICIAL-"
 
 DESCRIPTION="A beautiful cross platform Desktop Player for Google Play Music"
 HOMEPAGE="https://www.googleplaymusicdesktopplayer.com/"
-SRC_URI="https://github.com/MarshallOfSound/${MY_PN}/archive/v${PV}.tar.gz 
-https://github.com/MarshallOfSound/${MY_PN}/commit/c0c9e514cb21c01c906b2f3fe58110804e46c0c2.patch -> ${PN}-FixSegfault-c0c9e514cb21c01c906b2f3fe58110804e46c0c2.patch"
+
+# SRC_URI="https://github.com/MarshallOfSound/${MY_PN}/archive/v${PV}.tar.gz"
+EGIT_REPO_URI="https://github.com/MarshallOfSound/${MY_PN}.git"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
 IUSE="system-ffmpeg system-electron"
 
-BDEPEND=">=net-libs/nodejs-6.3.0[npm]
+BDEPEND="
+	>=net-libs/nodejs-6.3.0[npm]
 	net-dns/avahi[mdnsresponder-compat]
-	sys-apps/fakeroot"
+	sys-apps/fakeroot
+"
 
-RDEPEND="net-dns/avahi[mdnsresponder-compat]
+RDEPEND="
+	net-dns/avahi[mdnsresponder-compat]
 	system-ffmpeg? ( media-video/ffmpeg[chromium] )
-	system-electron? ( dev-util/electron )"
-
-S="${WORKDIR}/${MY_PN}-${PV}"
-
-PATCHES=(
-	"${DISTDIR}/${PN}-FixSegfault-c0c9e514cb21c01c906b2f3fe58110804e46c0c2.patch"
-)
+	system-electron? ( dev-util/electron )
+"
 
 src_compile() {
+
+	npm install node@11
+
 	npm install
 
 	npm run build
@@ -39,9 +41,7 @@ src_compile() {
 	if use amd64; then
 		npm run make:deb:64
 		MY_DEB="${S}/dist/installers/debian/${PN}_${PV}_amd64.deb"
-	fi
-
-	if use x86; then
+	else
 		npm run make:deb:32
 		MY_DEB="${S}/dist/installers/debian/${PN}_${PV}_i386.deb"
 	fi
