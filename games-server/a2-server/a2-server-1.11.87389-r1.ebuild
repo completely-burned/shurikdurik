@@ -1,9 +1,9 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
-inherit games systemd
+EAPI=7
+inherit systemd
 
 PATCH_P="${P}.tar.bz2"
 DESCRIPTION="ARMA 2 - Linux Server"
@@ -20,6 +20,8 @@ IUSE=""
 RESTRICT="mirror strip"
 
 RDEPEND="
+	acct-group/steamcmd
+	acct-user/steamcmd
 	sys-libs/glibc
 	sys-libs/zlib
 	amd64? (
@@ -28,27 +30,32 @@ RDEPEND="
 	)
 "
 
-GAMES_USER_DED=arma2
-dir=${GAMES_PREFIX_OPT}/${PN}
-QA_PREBUILT="${dir}"/arma2server
+QA_PREBUILT="
+	opt/steamcmd/${PN}/server
+	opt/steamcmd/${PN}/libsteam_api.so
+	opt/steamcmd/${PN}/steamclient.so
+	opt/steamcmd/${PN}/battleye/beserver.so
+"
 
 S=${WORKDIR}
 
 src_prepare() {
-	mv arma2server arma2server-daemon-bad.txt
-	mv server arma2server
 	rm -f tolower.c install
+	eapply_user
 }
 
 src_install() {
-	insinto "${dir}"
-	doins -r * || die "doins failed"
-	fperms +x "${dir}"/arma2server || die "fperms failed"
+	diropts -o steamcmd -g steamcmd
+	dodir /opt/steamcmd/${PN}
 
-	newconfd "${FILESDIR}"/${PN}.confd ${PN}
+	exeopts -o steamcmd -g steamcmd
+	exeinto /opt/steamcmd/${PN}
+	doexe server
+
+	rm server
+	insinto /opt/steamcmd/${PN}
+	doins -r *
+
 	systemd_dounit "${FILESDIR}"/${PN}.service
-
-	prepgamesdirs
-
-        fowners -R ${GAMES_USER_DED} "${dir}"
 }
+
