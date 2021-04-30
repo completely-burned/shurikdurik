@@ -5,12 +5,13 @@ After=local-fs.target network.target
 [Service]
 LimitCORE=1000000
 
-Environment=LD_LIBRARY_PATH=/opt/a2oa-server/ OTHERPARAMS="-cfg=basic.cfg -config=server.cfg -cpuCount=4 -maxMem=2047"
+Environment=LD_LIBRARY_PATH=/opt/steamcmd/a2oa-server/ OTHERPARAMS="-cfg=basic.cfg -config=server.cfg -cpuCount=4 -maxMem=2047"
 
-User=arma2
-WorkingDirectory=/opt/a2oa-server
+User=steamcmd
+WorkingDirectory=/opt/steamcmd/a2oa-server
 Restart=always
-ExecStart=/opt/a2oa-server/server -server ${OTHERPARAMS}
+ExecStart=/opt/steamcmd/a2oa-server/server -server ${OTHERPARAMS}
 
 [Install]
 WantedBy=multi-user.target
+
