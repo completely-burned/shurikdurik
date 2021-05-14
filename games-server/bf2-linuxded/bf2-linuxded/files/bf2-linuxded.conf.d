@@ -1,0 +1,2 @@
+TERM=xterm
+START_OPTS=""

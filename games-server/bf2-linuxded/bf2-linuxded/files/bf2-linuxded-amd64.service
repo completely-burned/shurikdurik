@@ -3,12 +3,12 @@ Description=Battlefield 2 Server
 After=network.target
 
 [Service]
-User=bf2
+User=bf2-linuxded
 EnvironmentFile=/etc/conf.d/bf2-linuxded
-Environment="LD_LIBRARY_PATH=/opt/bf2-linuxded/bin/ia-32"
+Environment="LD_LIBRARY_PATH=/opt/bf2-linuxded/bin/amd-64"
 WorkingDirectory=/opt/bf2-linuxded
 Restart=always
-ExecStart=/opt/bf2-linuxded/bin/ia-32/bf2 $START_OPTS
+ExecStart=/opt/bf2-linuxded/bin/amd-64/bf2 $START_OPTS
 SendSIGHUP=yes
 StandardOutput=null
 
