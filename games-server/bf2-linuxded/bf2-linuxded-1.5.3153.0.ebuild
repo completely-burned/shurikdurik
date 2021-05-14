@@ -19,6 +19,8 @@ IUSE="gzip"
 RESTRICT="mirror strip"
 
 RDEPEND="
+	acct-group/bf2-linuxded
+	acct-user/bf2-linuxded
 	sys-libs/glibc
 	sys-libs/ncurses
 	sys-libs/zlib
@@ -27,6 +29,8 @@ RDEPEND="
 QA_PREBUILT="
 	/opt/${PN}/bin/amd-64/bf2
 	/opt/${PN}/bin/ia-32/bf2
+	/opt/${PN}/bin/amd-64/pbsvnew.so
+	/opt/${PN}/bin/ia-32/pbsvnew.so
 "
 
 S=${WORKDIR}
@@ -47,9 +51,12 @@ src_prepare() {
 	else
 		rm -fR bin/amd-64 pb_amd-64
 	fi
+	eapply_user
 }
 
 src_install() {
+	diropts -o bf2-linuxded -g bf2-linuxded
+
 	doenvd ${FILESDIR}/99-bf2-linuxded
 
 	insinto /opt/${PN}
@@ -58,7 +65,7 @@ src_install() {
 	if use amd64 ; then
 		fperms +x /opt/${PN}/bin/amd-64/bf2
 		systemd_newunit "${FILESDIR}"/${PN}-amd64.service ${PN}.service
-		dosym pb_amd-64 "${dir}"/pb
+		dosym pb_amd-64 /opt/${PN}/pb
 	else
 		fperms +x /opt/${PN}/bin/ia-32/bf2
 		systemd_newunit "${FILESDIR}"/${PN}-x86.service ${PN}.service
