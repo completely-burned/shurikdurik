@@ -9,7 +9,7 @@ if [[ ${PV} = *9999* ]] ; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/intel/${MY_PN}"
 else
-	SRC_URI="https://github.com/intel/${MY_PN}/archive/refs/tags/${PV}.tar.gz"
+	SRC_URI="https://github.com/intel/${MY_PN}/archive/refs/tags/${PV}.tar.gz -> ${MY_PN}-${PV}.tar.gz"
 	S="${WORKDIR}/${MY_PN}-${PV}"
 	KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
 fi
