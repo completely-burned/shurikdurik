@@ -5,11 +5,12 @@ After=local-fs.target network.target
 [Service]
 LimitCORE=1000000
 
-Environment=OTHERPARAMS="-cfg=basic.cfg -config=server.cfg -cpuCount=4 -maxMem=2047"
+Environment=OTHERPARAMS="-cfg=basic.cfg -config=server.cfg"
 
 User=steamcmd
 WorkingDirectory=/opt/steamcmd/a2-server
 Restart=always
+
 ExecStart=/opt/steamcmd/a2-server/server -server ${OTHERPARAMS}
 
 [Install]

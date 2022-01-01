@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -38,11 +38,6 @@ QA_PREBUILT="
 "
 
 S=${WORKDIR}
-
-src_prepare() {
-	rm -f tolower.c install
-	eapply_user
-}
 
 src_install() {
 	diropts -o steamcmd -g steamcmd
