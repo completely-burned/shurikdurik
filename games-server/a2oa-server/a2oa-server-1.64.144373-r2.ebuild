@@ -18,8 +18,9 @@ SRC_URI="
 	ftp://downloads.bistudio.com/arma2.com/update/${PATCH_P}
 	https://www.dropbox.com/s/1by4asvkbx1ejxp/${PATCH_P}
 "
-
+# BUGS
 # https://forums.bohemia.net/forums/topic/213193-arma-2-oa-update-164-build-144629-release-candidate-for-eol-end-of-life/
+# https://github.com/completely-burned/shurikdurik/issues/1
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -46,21 +47,15 @@ QA_PREBUILT="
 
 S=${WORKDIR}
 
-src_prepare() {
-	rm -f tolower.c install
-	eapply_user
-}
-
 src_install() {
 	diropts -o steamcmd -g steamcmd
 	dodir /opt/steamcmd/${PN}
 
 	exeopts -o steamcmd -g steamcmd
 	exeinto /opt/steamcmd/${PN}
-	doexe server "${FILESDIR}"/${PN}-tolower.sh
+	doexe server
 
 	rm server
-
 	insinto /opt/steamcmd/${PN}
 	doins -r *
 
@@ -69,6 +64,6 @@ src_install() {
 
 pkg_postinst() {
 	ewarn "Update BattlEye"
-	ewarn "wget https://www.battleye.com/downloads/arma2oa/beserver.so -O ${dir}/expansion/battleye/beserver.so"
+	ewarn "wget https://www.battleye.com/downloads/arma2oa/beserver.so -O /opt/steamcmd/${PN}/expansion/battleye/beserver.so"
 }
 
