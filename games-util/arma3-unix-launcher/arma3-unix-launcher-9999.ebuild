@@ -26,12 +26,10 @@ DEPEND="
 "
 
 src_prepare() {
-	default
-	cmake_src_prepare
-
 	sed -i -e "s:#include\ <argparse.hpp>:#include\ <argparse\/argparse.hpp>:" \
 	"${S}/cmake/external_dependencies.cmake" || die "sed cmake/external_dependencies.cmake include argparse.hpp failed"
 	sed -i -e "s:#include\ <argparse.hpp>:#include\ <argparse\/argparse.hpp>:" \
 	"${S}/src/arma3-unix-launcher/main.cpp" || die "sed src/arma3-unix-launcher/main.cpp include argparse.hpp failed"
-}
 
+	cmake_src_prepare
+}
