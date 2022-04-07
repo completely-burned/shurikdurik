@@ -23,6 +23,7 @@ DEPEND="
 	dev-libs/pugixml
 	dev-libs/spdlog
 	dev-cpp/nlohmann_json
+	>=dev-libs/libfmt-8.0.0
 "
 
 src_prepare() {
