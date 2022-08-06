@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -11,12 +11,13 @@ HOMEPAGE="http://community.bistudio.com/wiki/ArmA:_Dedicated_Server"
 
 PATCH_P="${P}.tar.bz2"
 SRC_URI="
-	https://www.dropbox.com/s/ocq6m3afsi7oc34/${PATCH_P}
-	https://dl.dropbox.com/u/18463425/a2oa/${PATCH_P}
-	https://www.arma2.com/downloads/update/${PATCH_P}
-	https://downloads.bistudio.com/arma2.com/update/${PATCH_P}
+	http://ipfs.io/ipfs/Qmcoc1UWJpU288V6EhYZoDB7DYad7hDaG6S9QcwA5C1mHQ -> ${PATCH_P}
+	http://dl.dropbox.com/u/18463425/a2oa/${PATCH_P}
+	http://www.arma2.com/downloads/update/${PATCH_P}
+	http://downloads.bistudio.com/arma2.com/update/${PATCH_P}
 	ftp://downloads.bistudio.com/arma2.com/update/${PATCH_P}
-	https://www.dropbox.com/s/1by4asvkbx1ejxp/${PATCH_P}
+	http://www.dropbox.com/s/1by4asvkbx1ejxp/${PATCH_P}
+	http://www.dropbox.com/s/ocq6m3afsi7oc34/${PATCH_P}
 "
 # BUGS
 # https://forums.bohemia.net/forums/topic/213193-arma-2-oa-update-164-build-144629-release-candidate-for-eol-end-of-life/
