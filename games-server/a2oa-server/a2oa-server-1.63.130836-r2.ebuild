@@ -58,7 +58,7 @@ src_install() {
 	insinto /opt/steamcmd/${PATCH_PN}
 	doins -r *
 
-	systemd_newunit "${FILESDIR}"/${PN}.service-r1 ${PATCH_PN}.service
+	systemd_newunit "${FILESDIR}"/${PATCH_PN}.service ${PATCH_PN}.service
 }
 
 pkg_postinst() {
