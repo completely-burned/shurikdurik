@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -20,7 +20,7 @@ SRC_URI="
 	https://ipfs.io/ipfs/QmSmxUPL97ebREZ4iSx29kxv1jv7ShDjfWaCQWj4iyS3qg?filename=${PATCH_P} -> ${PATCH_P}
 "
 
-SLOT="0"
+SLOT="1.63"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror strip"
@@ -35,29 +35,30 @@ RDEPEND="
 		sys-libs/glibc[multilib]
 	)
 "
+PATCH_PN="${PN}-${SLOT}"
 
 QA_PREBUILT="
-	opt/steamcmd/${PN}/server
-	opt/steamcmd/${PN}/libsteam_api.so
-	opt/steamcmd/${PN}/steamclient.so
-	opt/steamcmd/${PN}/battleye/beserver.so
+	opt/steamcmd/${PATCH_PN}/server
+	opt/steamcmd/${PATCH_PN}/libsteam_api.so
+	opt/steamcmd/${PATCH_PN}/steamclient.so
+	opt/steamcmd/${PATCH_PN}/battleye/beserver.so
 "
 
 S=${WORKDIR}
 
 src_install() {
 	diropts -o steamcmd -g steamcmd
-	dodir /opt/steamcmd/${PN}
+	dodir /opt/steamcmd/${PATCH_PN}
 
 	exeopts -o steamcmd -g steamcmd
-	exeinto /opt/steamcmd/${PN}
+	exeinto /opt/steamcmd/${PATCH_PN}
 	doexe server
 
 	rm server
-	insinto /opt/steamcmd/${PN}
+	insinto /opt/steamcmd/${PATCH_PN}
 	doins -r *
 
-	systemd_newunit "${FILESDIR}"/${PN}.service-r1 ${PN}.service
+	systemd_newunit "${FILESDIR}"/${PN}.service-r1 ${PATCH_PN}.service
 }
 
 pkg_postinst() {
