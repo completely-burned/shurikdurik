@@ -7,7 +7,7 @@ HOMEPAGE="https://community.bistudio.com/wiki/Mikero_Tools"
 
 P_FILE="depbotools-${PV}-linux-amd64.tgz"
 SRC_URI="https://mikero.bytex.digital/api/download?filename=${P_FILE} -> ${P_FILE}
- https://ipfs.io/ipfs/QmQ1EAz9g5TTBHCZht2f7fRzKCEAgPZw91cEs5CE64aXrn?filename=${P_FILE} -> ${P_FILE}
+ http://ipfs.io/ipfs/QmQ1EAz9g5TTBHCZht2f7fRzKCEAgPZw91cEs5CE64aXrn -> ${P_FILE}
 "
 KEYWORDS="amd64"
 SLOT="0"
