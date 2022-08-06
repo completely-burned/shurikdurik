@@ -11,13 +11,13 @@ HOMEPAGE="http://community.bistudio.com/wiki/ArmA:_Dedicated_Server"
 
 PATCH_P="${P}.tar.bz2"
 SRC_URI="
-	https://www.dropbox.com/s/ocq6m3afsi7oc34/${PATCH_P}
-	https://dl.dropbox.com/u/18463425/a2oa/${PATCH_P}
-	https://www.arma2.com/downloads/update/${PATCH_P}
-	https://downloads.bistudio.com/arma2.com/update/${PATCH_P}
+	http://localhost:8080/ipfs/QmSmxUPL97ebREZ4iSx29kxv1jv7ShDjfWaCQWj4iyS3qg -> ${PATCH_P}
+	http://dl.dropbox.com/u/18463425/a2oa/${PATCH_P}
+	http://www.arma2.com/downloads/update/${PATCH_P}
+	http://downloads.bistudio.com/arma2.com/update/${PATCH_P}
 	ftp://downloads.bistudio.com/arma2.com/update/${PATCH_P}
-	https://www.dropbox.com/s/1by4asvkbx1ejxp/${PATCH_P}
-	https://ipfs.io/ipfs/QmSmxUPL97ebREZ4iSx29kxv1jv7ShDjfWaCQWj4iyS3qg?filename=${PATCH_P} -> ${PATCH_P}
+	http://www.dropbox.com/s/1by4asvkbx1ejxp/${PATCH_P}
+	http://www.dropbox.com/s/ocq6m3afsi7oc34/${PATCH_P}
 "
 
 SLOT="1.63"
