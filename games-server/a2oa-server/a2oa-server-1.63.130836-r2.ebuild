@@ -53,8 +53,8 @@ src_install() {
 	exeopts -o steamcmd -g steamcmd
 	exeinto /opt/steamcmd/${PATCH_PN}
 	doexe server
-
 	rm server
+
 	insinto /opt/steamcmd/${PATCH_PN}
 	doins -r *
 
@@ -65,4 +65,3 @@ pkg_postinst() {
 	ewarn "Update BattlEye"
 	ewarn "wget https://www.battleye.com/downloads/arma2oa/beserver.so -O /opt/steamcmd/${PN}/expansion/battleye/beserver.so"
 }
-

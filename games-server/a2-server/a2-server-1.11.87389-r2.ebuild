@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -46,11 +46,10 @@ src_install() {
 	exeopts -o steamcmd -g steamcmd
 	exeinto /opt/steamcmd/${PN}
 	doexe server
-
 	rm server
 	insinto /opt/steamcmd/${PN}
+
 	doins -r *
 
 	systemd_dounit "${FILESDIR}"/${PN}.service
 }
-
