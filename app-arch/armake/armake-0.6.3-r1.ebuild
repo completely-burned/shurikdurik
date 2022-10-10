@@ -13,7 +13,9 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/KoffeinFlummi/${PN}.git"
 	KEYWORDS=""
 else
-	SRC_URI="https://github.com/KoffeinFlummi/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/KoffeinFlummi/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
+		https://github.com/KoffeinFlummi/armake/pull/105.diff -> ${P}-105.patch
+	"
 	KEYWORDS="amd64 x86"
 fi
 
@@ -22,6 +24,10 @@ SLOT="0"
 BDEPEND="
 	dev-libs/openssl
 "
+
+PATCHES=(
+	"${DISTDIR}/${P}-105.patch"
+)
 
 src_prepare() {
 	default
