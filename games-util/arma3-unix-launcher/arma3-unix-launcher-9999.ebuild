@@ -2,18 +2,24 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="7"
+EAPI="8"
 
 inherit git-r3 cmake
 
 DESCRIPTION="ArmA 3 Unix Launcher"
 HOMEPAGE="https://github.com/muttleyxd/arma3-unix-launcher"
+LICENSE="MIT"
 
 EGIT_REPO_URI="https://github.com/muttleyxd/arma3-unix-launcher.git"
+if [[ "${PV}" != "9999" ]]
+then
+	MY_PV="${PV/0_alpha/commit-}"
+	EGIT_COMMIT="${MY_PV}"
+fi
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="dayz"
 
 # TODO: curlpp
 # TODO: DEPEND GUI
@@ -27,10 +33,17 @@ DEPEND="
 "
 
 src_prepare() {
-	sed -i -e "s:#include\ <argparse.hpp>:#include\ <argparse\/argparse.hpp>:" \
+	sed -i -e "s:<argparse.hpp>:<argparse\/argparse.hpp>:" \
 	"${S}/cmake/external_dependencies.cmake" || die "sed cmake/external_dependencies.cmake include argparse.hpp failed"
-	sed -i -e "s:#include\ <argparse.hpp>:#include\ <argparse\/argparse.hpp>:" \
+	sed -i -e "s:<argparse.hpp>:<argparse\/argparse.hpp>:" \
 	"${S}/src/arma3-unix-launcher/main.cpp" || die "sed src/arma3-unix-launcher/main.cpp include argparse.hpp failed"
+	sed -i -e "s:<argparse.hpp>:<argparse\/argparse.hpp>:" \
+	"${S}/src/dayz-linux-launcher/main.cpp" || die "sed src/dayz-linux-launcher/main.cpp include argparse.hpp failed"
 
 	cmake_src_prepare
+
+	local mycmakeargs=(
+		-DBUILD_DAYZ_LAUNCHER=$(usex dayz)
+	)
+	cmake_src_configure
 }
