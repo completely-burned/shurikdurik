@@ -19,7 +19,7 @@ EGIT_COMMIT="${MY_TAG}"
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~arm ~arm64"
-IUSE="-clang debug"
+IUSE=""
 DEPEND="
 		media-libs/glew
 		media-libs/freeimage
@@ -40,14 +40,6 @@ DEPEND="
 		dev-vcs/git
 		media-libs/libglvnd
 		dev-util/cmake
-
-		!clang? (
-			>sys-devel/gcc-7.5.0
-		)
-
-		clang? (
-				sys-devel/clang
-		)
 "
 RDEPEND=${DEPEND}
 
