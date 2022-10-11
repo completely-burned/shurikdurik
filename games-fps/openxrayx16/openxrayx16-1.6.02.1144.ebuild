@@ -9,8 +9,6 @@ MY_PN="xray-16"
 MY_TAG="1144-december-2021-rc1"
 MY_P="${MY_PN}-${MY_TAG}"
 
-# TODO: SUBMODULES
-#SRC_URI="https://github.com/OpenXRay/${MY_PN}/archive/refs/tags/${MY_TAG}.tar.gz -> ${MY_P}.tar.gz"
 RESTRICT="mirror strip"
 EGIT_REPO_URI="https://github.com/OpenXRay/xray-16.git"
 EGIT_BRANCH="dev"
@@ -43,5 +41,13 @@ DEPEND="
 "
 RDEPEND=${DEPEND}
 
-#S=${WORKDIR}/${MY_P}
 S=${WORKDIR}/${PN}-${PV}
+
+src_configure() {
+
+	local mycmakeargs=(
+		-DCMAKE_BUILD_TYPE=Release
+	)
+
+	cmake_src_configure
+}
