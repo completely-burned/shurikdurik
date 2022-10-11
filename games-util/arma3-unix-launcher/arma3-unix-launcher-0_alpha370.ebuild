@@ -41,7 +41,9 @@ src_prepare() {
 	"${S}/src/dayz-linux-launcher/main.cpp" || die "sed src/dayz-linux-launcher/main.cpp include argparse.hpp failed"
 
 	cmake_src_prepare
+}
 
+src_configure() {
 	local mycmakeargs=(
 		-DBUILD_DAYZ_LAUNCHER=$(usex dayz)
 	)
