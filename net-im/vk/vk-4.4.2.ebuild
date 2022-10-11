@@ -1,6 +1,9 @@
+# Copyright 1999-2022 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
 EAPI=7
 
-inherit unpacker desktop
+inherit unpacker desktop xdg-utils
 
 DESCRIPTION="VK Messenger"
 HOMEPAGE="https://vk.com/desktop_app"
@@ -15,43 +18,29 @@ SRC_URI="
 LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="system-ffmpeg system-electron"
-
-RDEPEND="
-	system-ffmpeg? ( media-video/ffmpeg[chromium] )
-	system-electron? ( dev-util/electron )
-"
+RESTRICT="mirror bindist"
+IUSE=""
 
 S="${WORKDIR}"
 
-dir=/opt/${PN}
+QA_PREBUILT="
+	opt/${PN}/vk
+	opt/${PN}/resources/app/dist/libEGL.so
+	opt/${PN}/resources/app/dist/libGLESv2.so
+	opt/${PN}/resources/app/dist/libppapi_voip_swiftshader_x86_64.so
+	opt/${PN}/resources/app/dist/libppapi_voip_x86_64.so
+	opt/${PN}/libffmpeg.so
+	opt/${PN}/libnode.so
 
-src_unpack() {
-	unpack_deb ${A}
-}
-
-src_prepare() {
-	if use system-electron; then
-		rm usr/lib/${PN}/libnode.so
-	fi
-
-	if use system-ffmpeg; then
-		rm usr/lib/${PN}/libffmpeg.so
-	fi
-
-	rm usr/lib/${PN}/resources/app/dist/libGLESv2.so
-	rm usr/lib/${PN}/resources/app/dist/libEGL.so
-
-	eapply_user
-}
+"
 
 src_install() {
-	insinto ${dir}
+	insinto /opt/${PN}
 	doins -r usr/lib/vk/*
 
-	fperms +x ${dir}/vk
+	fperms +x /opt/${PN}/vk
 
-	dosym ${dir}/vk /opt/bin/vk
+	dosym /opt/${PN}/vk /opt/bin/vk
 
 	dodoc -r usr/share/doc/*
 
@@ -67,4 +56,16 @@ src_install() {
 	insinto /usr/share/lintian/
 	doins -r usr/share/lintian/*
 
+}
+
+pkg_postinst() {
+	xdg_desktop_database_update
+	xdg_mimeinfo_database_update
+	xdg_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
+	xdg_mimeinfo_database_update
+	xdg_icon_cache_update
 }
