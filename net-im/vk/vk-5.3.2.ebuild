@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -19,12 +19,7 @@ LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 RESTRICT="mirror bindist"
-
-IUSE="system-ffmpeg"
-
-RDEPEND="
-	system-ffmpeg? ( media-video/ffmpeg[chromium] )
-"
+IUSE=""
 
 S="${WORKDIR}"
 
@@ -38,15 +33,6 @@ QA_PREBUILT="
 	opt/${PN}/libnode.so
 
 "
-
-src_prepare() {
-	default
-
-	if use system-ffmpeg; then
-		rm usr/lib/${PN}/libffmpeg.so
-	fi
-
-}
 
 src_install() {
 	insinto /opt/${PN}
@@ -83,4 +69,3 @@ pkg_postrm() {
 	xdg_mimeinfo_database_update
 	xdg_icon_cache_update
 }
-
