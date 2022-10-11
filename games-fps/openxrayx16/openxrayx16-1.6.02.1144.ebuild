@@ -43,11 +43,4 @@ RDEPEND=${DEPEND}
 
 S=${WORKDIR}/${PN}-${PV}
 
-src_configure() {
-
-	local mycmakeargs=(
-		-DCMAKE_BUILD_TYPE=Release
-	)
-
-	cmake_src_configure
-}
+CMAKE_BUILD_TYPE=Release
