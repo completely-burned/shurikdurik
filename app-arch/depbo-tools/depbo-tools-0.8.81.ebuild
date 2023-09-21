@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="8"
@@ -6,9 +6,11 @@ DESCRIPTION="DePbo tools for Linux consists of a shared library and a set of com
 HOMEPAGE="https://community.bistudio.com/wiki/Mikero_Tools"
 
 P_FILE="depbotools-${PV}-linux-amd64.tgz"
-SRC_URI="https://mikero.bytex.digital/api/download?filename=${P_FILE} -> ${P_FILE}
- http://ipfs.io/ipfs/QmQ1EAz9g5TTBHCZht2f7fRzKCEAgPZw91cEs5CE64aXrn -> ${P_FILE}
+SRC_URI="
+	http://mikero.bytex.digital/api/download?filename=${P_FILE} -> ${P_FILE}
+	http://ipfs.io/ipfs/QmQ1EAz9g5TTBHCZht2f7fRzKCEAgPZw91cEs5CE64aXrn -> ${P_FILE}
 "
+RESTRICT="mirror bindist"
 KEYWORDS="amd64"
 SLOT="0"
 
