@@ -25,7 +25,6 @@ RESTRICT="mirror"
 
 # TODO:
 # gevent>=1.3.0
-# gevent-eventemitter~=2.1
 
 RDEPEND="
 	$(python_gen_cond_dep '
@@ -37,5 +36,6 @@ RDEPEND="
 		>=dev-python/protobuf-python-3.0[${PYTHON_USEDEP}]
 		>=dev-python/cachetools-3.0.0[${PYTHON_USEDEP}]
 		>=dev-python/pycryptodomex-3.7.0[${PYTHON_USEDEP}]
+		>=dev-python/gevent-eventemitter-2.1[${PYTHON_USEDEP}]
 	')
 "
