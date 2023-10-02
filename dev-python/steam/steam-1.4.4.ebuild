@@ -23,7 +23,7 @@ SLOT="0"
 KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux ~x64-macos ~x64-solaris"
 RESTRICT="mirror"
 
-# TODO: pycryptodomex>=3.7.0
+# TODO:
 # gevent>=1.3.0
 # gevent-eventemitter~=2.1
 
@@ -36,5 +36,6 @@ RDEPEND="
 		>=dev-python/gevent-1.3.0[${PYTHON_USEDEP}]
 		>=dev-python/protobuf-python-3.0[${PYTHON_USEDEP}]
 		>=dev-python/cachetools-3.0.0[${PYTHON_USEDEP}]
+		>=dev-python/pycryptodomex-3.7.0[${PYTHON_USEDEP}]
 	')
 "
