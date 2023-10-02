@@ -4,6 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
+PYPI_NO_NORMALIZE=1
 PYTHON_COMPAT=( python3_{4..12} pypy pypy3 )
 
 inherit distutils-r1 pypi
@@ -12,10 +13,6 @@ DESCRIPTION="EventEmitter using gevent"
 HOMEPAGE="
 	https://github.com/rossengeorgiev/gevent-eventemitter
 	https://pypi.org/project/gevent-eventemitter
-"
-SRC_URI="
-	https://github.com/rossengeorgiev/gevent-eventemitter/archive/v${PV}.tar.gz
-		-> ${P}.gh.tar.gz
 "
 
 LICENSE="MIT"
