@@ -1,6 +1,8 @@
 EAPI=7
 inherit git-r3
 
+PROPERTIES+=" live"
+
 DESCRIPTION="Open-source xray engine"
 HOMEPAGE="https://github.com/OpenXRay"
 LICENSE="BSD"
@@ -32,7 +34,7 @@ DEPEND="
 		app-arch/lzop
 		dev-vcs/git
 		media-libs/libglvnd
-		dev-util/cmake
+		dev-build/cmake
 		
 		!clang? (
 			>sys-devel/gcc-7.5.0

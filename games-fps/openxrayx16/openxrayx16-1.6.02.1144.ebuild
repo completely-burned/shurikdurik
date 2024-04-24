@@ -37,7 +37,7 @@ DEPEND="
 		app-arch/lzop
 		dev-vcs/git
 		media-libs/libglvnd
-		dev-util/cmake
+		dev-build/cmake
 "
 RDEPEND=${DEPEND}
 
