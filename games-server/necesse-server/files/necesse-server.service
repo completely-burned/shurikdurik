@@ -1,0 +1,14 @@
+[Unit]
+Description=Necesse Dedicated Server
+After=network.target
+
+[Service]
+PrivateTmp=true
+Type=simple
+User=steamcmd
+WorkingDirectory=/opt/steamcmd/necesse-server
+ExecStart=/usr/bin/java -jar Server.jar -nogui ${NECESSE_OPTS}
+
+
+[Install]
+WantedBy=multi-user.target
